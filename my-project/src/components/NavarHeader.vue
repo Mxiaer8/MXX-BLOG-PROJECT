@@ -86,7 +86,7 @@ export default {
   mounted: function () {
     // console.log(this.getCookie('Mxiaer8_userName'))
     if (this.getCookie('Mxiaer8_userName') !== '' && this.getCookie('Mxiaer8_userPwd') !== '') {
-      axios.post('/users/login', {
+      axios.post('http://www.mxiaer8.cn:3000/users/login', {
         userName: this.getCookie('Mxiaer8_userName'),
         userPwd: this.getCookie('Mxiaer8_userPwd')
       }).then((response) => {
@@ -124,16 +124,18 @@ export default {
     handleClick (tab, event) {
       // console.log(tab._uid)
       if (tab._uid === 6) {
-        window.location.href = 'http://localhost:8080/#/'
+        this.$router.push({path: '/'})
+        // window.location.href = 'http://localhost:8080/#/'
       } else if (tab._uid === 7) {
-        window.location.href = 'http://localhost:8080/#/aboutMe'
+        this.$router.push({path: '/aboutMe'})
+        // window.location.href = 'http://localhost:8080/#/aboutMe'
       }
     },
     login () {
       var password = md5(this.form_login.password) // 加密处理
       this.userName = this.form_login.name
       this.userPwd = password
-      axios.post('/users/login', {
+      axios.post('http://www.mxiaer8.cn:3000/users/login', {
         userName: this.userName,
         userPwd: this.userPwd
       }).then((response) => {
@@ -163,7 +165,8 @@ export default {
       })
     },
     toWrite () {
-      window.location.href = 'http://localhost:8080/#/write'
+      this.$router.push({path: '/write'})
+      // window.location.href = 'http://www.mxiaer8.cn:8080/dist/#/write'
     },
     toOut () {
       document.cookie = 'Mxiaer8_userName='
@@ -172,7 +175,8 @@ export default {
     },
     manageBlog () {
       if (this.userName === 'MXX') {
-        window.location.href = 'http://localhost:8080/#/adminManage'
+        this.$router.push({path: '/adminManage'})
+        // window.location.href = 'http://www.mxiaer8.cn:8080/dist/#/adminManage'
       }
     }
   }

@@ -37,7 +37,7 @@ export default {
   },
   mounted: function () {
     var search = decodeURI(window.location.href.split('=')[1])
-    axios.post('/articles/findLikesArticles', {
+    axios.post('http://www.mxiaer8.cn:3000/articles/findLikesArticles', {
       likes: search
     }).then((response) => {
       // console.log(response.data)

@@ -24,7 +24,7 @@ export default {
     }
   },
   mounted: function () {
-    axios.get('/articles').then((response) => {
+    axios.get('http://www.mxiaer8.cn:3000/articles').then((response) => {
       if (response.data.status === '0') {
         this.articlesList = response.data.result.list
         this.articlesList.reverse()
@@ -42,7 +42,8 @@ export default {
       return dds
     },
     articlesDetail (id, index) {
-      window.location.href = 'http://localhost:8080/#/theArticles?' + 'articlesId=' + id + '&articlesIndex=' + index
+      this.$router.push({path: '/theArticles?' + 'articlesId=' + id + '&articlesIndex=' + index})
+      // window.location.href = 'http://localhost:8080/#/theArticles?' + 'articlesId=' + id + '&articlesIndex=' + index
     }
   }
 }

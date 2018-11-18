@@ -27,7 +27,7 @@ export default {
     }
   },
   mounted: function () {
-    axios.get('/articles').then((response) => {
+    axios.get('http://www.mxiaer8.cn:3000/articles').then((response) => {
       if (response.data.status === '0') {
         this.articlesList = response.data.result.list
         this.articlesList.reverse()
@@ -41,7 +41,7 @@ export default {
       window.location.href = 'http://localhost:8080/#/theArticles?' + 'articlesId=' + id
     },
     deleteArticle (id, index) {
-      axios.post('/articles/deleteArticle', {
+      axios.post('http://www.mxiaer8.cn:3000/articles/deleteArticle', {
         articlesId: id
       }).then((response) => {
         // console.log(response.data.status)

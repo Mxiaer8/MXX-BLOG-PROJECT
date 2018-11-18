@@ -36,7 +36,7 @@ export default {
   },
   mounted: function () {
     // console.log(this.article_Id)
-    axios.post('/articles/findOneArticle', {
+    axios.post('http://www.mxiaer8.cn:3000/articles/findOneArticle', {
       articles_Id: this.article_Id
     }).then((response) => {
       // console.log(response.data)
@@ -48,7 +48,7 @@ export default {
         this.read = queryResult.articlesRead + 1
         this.point = queryResult.articlesPoint
       }
-      axios.post('/articles/hasRead', {
+      axios.post('http://www.mxiaer8.cn:3000/articles/hasRead', {
         articles_Id: this.article_Id,
         articles_Read: this.read
       }).then((response) => {

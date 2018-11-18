@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Articles = require('../models/articles');
 
 //连接数据库
-mongoose.connect('mongodb://127.0.0.1:27017/blog');
+mongoose.connect('mongodb://Mxiaer8:mxx12158@127.0.0.1:27017/blog?authSource=admin');
 
 mongoose.connection.on("connected", function () {
     console.log("MongoDB connected success")

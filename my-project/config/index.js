@@ -11,12 +11,19 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/articles/*':{
-        target: 'http://localhost:3000'
-      },
-      '/users/*': {
-        target: 'http://localhost:3000'
-      }
+      // '/api':{
+      //   target: "www.mxiaer8.cn:3000",
+      //   changeOrigin:true,
+      //   pathRewrite:{
+      //     '^/api':''
+      //   }
+      // }
+      // '/articles/*':{
+      //   target: 'localhost:3000'
+      // },
+      // '/users/*': {
+      //   target: 'localhost:3000'
+      // }
     },
 
     // Various Dev Server settings
@@ -57,7 +64,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps

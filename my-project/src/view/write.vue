@@ -84,7 +84,7 @@ export default {
           type: 'warning'
         })
       } else {
-        axios.post('/articles/editArticle', {
+        axios.post('http://www.mxiaer8.cn:3000/articles/editArticle', {
           articlesText: this.content,
           articlesName: this.ruleForm.name,
           articlesTime: this.time,
@@ -98,7 +98,7 @@ export default {
               message: '发布成功',
               type: 'success'
             })
-            window.location.href = 'http://localhost:8080/#/'
+            this.$router.push({path: '/'})
           }
         }).catch(function (error) {
           console.log(error)
