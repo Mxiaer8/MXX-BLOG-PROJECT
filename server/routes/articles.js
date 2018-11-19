@@ -3,8 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Articles = require('../models/articles');
 
-//Á¬½ÓÊı¾İ¿â
-mongoose.connect('mongodb://Mxiaer8:mxx12158@127.0.0.1:27017/blog?authSource=admin');
+//è¿æ¥æ•°æ®åº“
+mongoose.connect('mongodb:/127.0.0.1:27017/blog?authSource=admin');
 
 mongoose.connection.on("connected", function () {
     console.log("MongoDB connected success")
@@ -18,7 +18,7 @@ mongoose.connection.on("disconnected", function () {
     console.log("MongoDB connected disconnected")
 });
 
-//»ñÈ¡ÎÄÕÂÁĞ±í
+//è·å–æ–‡ç« åˆ—è¡¨
 router.get("/",function (req, res, next) {
    Articles.find({},function (err, doc) {
        if(err) {
@@ -46,7 +46,7 @@ router.get("/",function (req, res, next) {
    })
 });
 
-//¸ù¾İ_id»ñÈ¡Ä³Ò»ÆªÎÄÕÂ
+//æ ¹æ®_idè·å–æŸä¸€ç¯‡æ–‡ç« 
 router.post("/findOneArticle",function (req, res, next) {
    // console.log(req.body.articles_Id)
     var parm = {"_id": req.body.articles_Id}
@@ -74,7 +74,7 @@ router.post("/findOneArticle",function (req, res, next) {
     })
 })
 
-//Ä£ºı²éÑ¯Ä³Ò»ÆªÎÄÕÂ
+//æ¨¡ç³ŠæŸ¥è¯¢æŸä¸€ç¯‡æ–‡ç« 
 router.post('/findLikesArticles',function (req, res, next) {
    var parm  = {}
    parm['articlesName'] = new RegExp(req.body.likes)
@@ -102,7 +102,7 @@ router.post('/findLikesArticles',function (req, res, next) {
 })
 
 
-//±à¼­ÎÄÕÂ
+//ç¼–è¾‘æ–‡ç« 
 router.post('/editArticle', function (req, res, next) {
     // console.log(req.body.articlesText)
     var parm = {
@@ -128,7 +128,7 @@ router.post('/editArticle', function (req, res, next) {
     })
 })
 
-//É¾³ıÎÄÕÂ
+//åˆ é™¤æ–‡ç« 
 router.post('/deleteArticle', function (req, res, next) {
    //  console.log(req.body.articlesId)
     var parm = {"_id": req.body.articlesId}
@@ -148,7 +148,7 @@ router.post('/deleteArticle', function (req, res, next) {
     })
 })
 
-//ÔÄ¶ÁÎÄÕÂµÄÈËÊı+1
+//é˜…è¯»æ–‡ç« çš„äººæ•°+1
 router.post("/hasRead",function (req, res, next) {
    console.log(req.body.articles_Read)
     Articles.update({"_id":req.body.articles_Id }, {$set: {"articlesRead": req.body.articles_Read}}, function (err) {
