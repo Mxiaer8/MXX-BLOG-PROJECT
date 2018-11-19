@@ -37,8 +37,9 @@ export default {
     })
   },
   methods: {
-    articlesDetail (id) {
-      window.location.href = 'http://localhost:8080/#/theArticles?' + 'articlesId=' + id
+    articlesDetail (id, index) {
+      this.$router.push({path: '/theArticles?' + 'articlesId=' + id + '&articlesIndex=' + index})
+      // window.location.href = 'http://localhost:8080/#/theArticles?' + 'articlesId=' + id
     },
     deleteArticle (id, index) {
       axios.post('http://www.mxiaer8.cn:3000/articles/deleteArticle', {

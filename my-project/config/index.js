@@ -18,12 +18,12 @@ module.exports = {
       //     '^/api':''
       //   }
       // }
-      // '/articles/*':{
-      //   target: 'localhost:3000'
-      // },
-      // '/users/*': {
-      //   target: 'localhost:3000'
-      // }
+      '/articles/*':{
+        target: 'http://localhost:3000'
+      },
+      '/users/*': {
+        target: 'http://localhost:3000'
+      }
     },
 
     // Various Dev Server settings

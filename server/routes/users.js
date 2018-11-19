@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Users = require('../models/users');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.json('respond with a resource');
+    res.json('respond with a resource');
 });
 
 router.post('/login', function(req, res, next) {
@@ -12,7 +12,7 @@ router.post('/login', function(req, res, next) {
         userName: req.body.userName,
         userPwd: req.body.userPwd
     }
-   // console.log(parm);
+    // console.log(parm);
     Users.findOne(parm, function (err, doc) {
         // console.log("test")
         if(err) {
@@ -36,6 +36,45 @@ router.post('/login', function(req, res, next) {
             })
         }
     })
-    //res.json('respond with 2 resource');
+});
+router.post('/register', function(req, res, next) {
+    var parm = {}
+    parm = {userName: req.body.userName}
+    // console.log(parm);
+    Users.findOne(parm, function (err, doc) {
+        // console.log("test")
+        if(err) {
+            // console.log("error!")
+            res.json({
+                status: '1',
+                msg: err.message
+            })
+        } else if(doc) {
+
+            res.json({
+                status: '-1',
+                msg: 'reUserName'
+            })
+        } else {
+            var parms = new Users({
+                userName: req.body.userName,  userPwd: req.body.userPwd
+            })
+            parms.save(parm, function (err, doc) {
+                // console.log("test")
+                if(err) {
+                    // console.log("error!")
+                    res.json({
+                        status: '1',
+                        msg: err.message
+                    })
+                } else if(doc) {
+                    res.json({
+                        status: '0',
+                        msg: 'success'
+                    })
+                }
+            })
+        }
+    })
 });
 module.exports = router;

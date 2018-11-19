@@ -37,7 +37,7 @@
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="dialogFormVisible_register = false" class = "form_register">注册</el-button>
+          <el-button type="primary" @click="register()" class = "form_register">注册</el-button>
         </div>
       </el-dialog>
         <div class = "isLogin_text" v-if="isLogin" @click = "manageBlog()">
@@ -86,7 +86,7 @@ export default {
   mounted: function () {
     // console.log(this.getCookie('Mxiaer8_userName'))
     if (this.getCookie('Mxiaer8_userName') !== '' && this.getCookie('Mxiaer8_userPwd') !== '') {
-      axios.post('http://www.mxiaer8.cn:3000/users/login', {
+      axios.post('/users/login', {
         userName: this.getCookie('Mxiaer8_userName'),
         userPwd: this.getCookie('Mxiaer8_userPwd')
       }).then((response) => {
@@ -135,7 +135,7 @@ export default {
       var password = md5(this.form_login.password) // 加密处理
       this.userName = this.form_login.name
       this.userPwd = password
-      axios.post('http://www.mxiaer8.cn:3000/users/login', {
+      axios.post('/users/login', {
         userName: this.userName,
         userPwd: this.userPwd
       }).then((response) => {
@@ -163,6 +163,47 @@ export default {
       }).catch(function (error) {
         console.log(error)
       })
+    },
+    register () {
+      var password = md5(this.form_register.password) // 加密处理
+      this.userName = this.form_register.name
+      this.userPwd = password
+      if (this.form_register.name === '' || this.form_register.password === '') {
+        this.$notify.error({
+          title: '错误',
+          message: '用户名和密码不可为空！'
+        })
+      } else {
+        axios.post('/users/register', {
+          userName: this.userName,
+          userPwd: this.userPwd
+        }).then((response) => {
+          if (response.data.status === '0') {
+            this.dialogFormVisible_register = false
+            this.isShow = false
+            this.isLogin = true
+            this.isOut = true
+            this.$notify({
+              title: '成功',
+              message: '注册成功',
+              type: 'success'
+            })
+            // // 设置cookie
+            // var exp = new Date()
+            // exp.setTime(exp.getTime() + 60 * 1000 * 60 * 24) // cookie保存24小时
+            // document.cookie = 'Mxiaer8_userName=' + this.userName + ';expires=' + exp.toGMTString()
+            // document.cookie = 'Mxiaer8_userPwd=' + password + ';expires=' + exp.toGMTString()
+          } else if (response.data.status === '-1') {
+            this.dialogFormVisible_register = true
+            this.$notify.error({
+              title: '错误',
+              message: '该用户名已被注册过哦！'
+            })
+          }
+        }).catch(function (error) {
+          console.log(error)
+        })
+      }
     },
     toWrite () {
       this.$router.push({path: '/write'})

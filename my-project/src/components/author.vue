@@ -35,7 +35,8 @@ export default {
   },
   methods: {
     articlesDetail (id, index) {
-      window.location.href = 'http://localhost:8080/#/theArticles?' + 'articlesId=' + id + '&articlesIndex=' + index
+      this.$router.push({path: '/theArticles?' + 'articlesId=' + id + '&articlesIndex=' + index})
+      // window.location.href = 'http://localhost:8080/#/theArticles?' + 'articlesId=' + id + '&articlesIndex=' + index
       window.location.reload(true)
     }
   }
